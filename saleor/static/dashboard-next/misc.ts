@@ -1,6 +1,6 @@
 import { stringify } from "qs";
-import { TaxRateType } from "./gql-types";
 import i18n from "./i18n";
+import { TaxRateType } from "./types/globalTypes";
 
 export interface PageInfo {
   endCursor: string;
@@ -144,3 +144,12 @@ export const translatedTaxRates = () => ({
   [TaxRateType.STANDARD]: i18n.t("Standard"),
   [TaxRateType.WATER]: i18n.t("Water")
 });
+
+export function maybe<T>(exp: () => T, d?: T) {
+  try {
+    const result = exp();
+    return result === undefined ? d : result;
+  } catch {
+    return d;
+  }
+}
